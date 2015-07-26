@@ -128,6 +128,12 @@ class CalculatorBrain {
         opStack.append(operation)
     }
     
+    func undoLastOp() {
+        if opStack.count > 0 {
+            opStack.removeLast()
+        }
+    }
+    
     func evaluate() throws -> Double {
         return try evaluate(opStack).result
     }

@@ -183,7 +183,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="backspace" destination="BYZ-38-t0r" eventType="touchUpInside" id="GrD-ab-QyF"/>
+                                    <action selector="undo" destination="BYZ-38-t0r" eventType="touchUpInside" id="8ft-ZV-Owy"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Zn-BJ-R5V">
