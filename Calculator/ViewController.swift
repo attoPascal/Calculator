@@ -13,8 +13,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var display: UILabel!
     @IBOutlet weak var history: UILabel!
     
-    var userIsInTheMiddleOfTypingANumber = false
-    var brain = CalculatorBrain()
+    private var brain = CalculatorBrain()
+    private var userIsInTheMiddleOfTypingANumber = false
     
     var displayValue: Double? {
         get {
@@ -50,57 +50,42 @@ class ViewController: UIViewController {
     }
     
     @IBAction func enter() {
-        do {
-            if let value = displayValue {
-                userIsInTheMiddleOfTypingANumber = false
-                brain.pushOperand(value)
-                displayValue = try brain.evaluate()
-                updateHistory()
-            }
-        }
-        catch {
-            displayErrorMessage(error)
+        if let value = displayValue {
+            userIsInTheMiddleOfTypingANumber = false
+            brain.pushOperand(value)
+            updateUI()
         }
     }
     
     @IBAction func clear() {
-        display.text = "0"
-        userIsInTheMiddleOfTypingANumber = false
         brain = CalculatorBrain()
-        updateHistory()
+        userIsInTheMiddleOfTypingANumber = false
+        updateUI()
     }
     
     @IBAction func undo() {
         if userIsInTheMiddleOfTypingANumber {
             // undo typing: backspace
             if display.text!.characters.count > 1 {
-                display.text = String(dropLast((display.text!).characters))
+                display.text = String(dropLast(display.text!.characters))
             } else {
-                display.text = "0"
+                displayValue = 0
                 userIsInTheMiddleOfTypingANumber = false
             }
         } else {
             // undo last action
             brain.undoLastOp()
-            updateHistory()
+            updateUI()
         }
     }
     
     @IBAction func operate(sender: UIButton) {
         guard let operation = sender.currentTitle else { return }
         
-        if userIsInTheMiddleOfTypingANumber {
-            enter()
-        }
+        if userIsInTheMiddleOfTypingANumber { enter() }
+        try! brain.performOperation(operation)
         
-        do {
-            try brain.performOperation(operation)
-            updateHistory()
-            displayValue = try brain.evaluate()
-        }
-        catch {
-            displayErrorMessage(error)
-        }
+        updateUI()
     }
     
     @IBAction func switchSign(sender: UIButton) {
@@ -119,34 +104,31 @@ class ViewController: UIViewController {
     }
     
     @IBAction func setMemory() {
-        do {
-            brain.variableValues["M"] = displayValue
+        if let value = displayValue {
+            brain.variableValues["M"] = value
             userIsInTheMiddleOfTypingANumber = false
-            displayValue = try brain.evaluate()
-            updateHistory()
-        }
-        catch {
-            //displayErrorMessage(error)
+            updateUI()
         }
     }
     
     @IBAction func pushMemory() {
-        if userIsInTheMiddleOfTypingANumber {
-            enter()
-        }
+        if userIsInTheMiddleOfTypingANumber { enter() }
         brain.pushOperand("M")
-        updateHistory()
+        updateUI()
     }
     
-    func updateHistory() {
-        var text = brain.description ?? " "
-        if brain.calculationComplete {
-            text = text + " ="
+    private func updateUI() {
+        do {
+            displayValue = try brain.evaluate()
+        } catch {
+            displayErrorMessage(error)
         }
-        history.text = text
+        
+        // history label: show equals sign only if calculation is complete
+        history.text = (brain.calculationComplete) ? String(brain) + " =" : String(brain)
     }
     
-    func displayErrorMessage(error: ErrorType) {
+    private func displayErrorMessage(error: ErrorType) {
         if let calculatorError = error as? CalculatorError {
             switch calculatorError {
             case .MissingArgument:

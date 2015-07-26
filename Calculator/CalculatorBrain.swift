@@ -16,7 +16,7 @@ enum CalculatorError: ErrorType {
     case NegativeRoot
 }
 
-class CalculatorBrain {
+class CalculatorBrain: CustomStringConvertible {
     
     private enum Op: CustomStringConvertible {
         case Operand(Double)
@@ -72,6 +72,7 @@ class CalculatorBrain {
     }
     
     var calculationComplete: Bool {
+        guard !opStack.isEmpty else { return false }
         do {
             let (_, remainingOps) = try evaluate(opStack)
             return remainingOps.count == 0
@@ -129,7 +130,7 @@ class CalculatorBrain {
     }
     
     func undoLastOp() {
-        if opStack.count > 0 {
+        if !opStack.isEmpty {
             opStack.removeLast()
         }
     }
@@ -139,7 +140,7 @@ class CalculatorBrain {
     }
     
     private func evaluate(ops: [Op]) throws -> (result: Double, remainingOps: [Op]) {
-        guard !ops.isEmpty else { throw CalculatorError.MissingArgument }
+        guard !ops.isEmpty else { return (0, []) }
         
         var remainingOps = ops
         let op = remainingOps.removeLast()
