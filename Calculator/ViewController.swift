@@ -70,14 +70,19 @@ class ViewController: UIViewController {
         updateHistory()
     }
     
-    @IBAction func backspace() {
+    @IBAction func undo() {
         if userIsInTheMiddleOfTypingANumber {
+            // undo typing: backspace
             if display.text!.characters.count > 1 {
                 display.text = String(dropLast((display.text!).characters))
             } else {
                 display.text = "0"
                 userIsInTheMiddleOfTypingANumber = false
             }
+        } else {
+            // undo last action
+            brain.undoLastOp()
+            updateHistory()
         }
     }
     
