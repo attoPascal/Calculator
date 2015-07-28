@@ -67,10 +67,6 @@ class CalculatorBrain: CustomStringConvertible {
         return result
     }
     
-    var history: [String] {
-        return opStack.map { String($0) }
-    }
-    
     var calculationComplete: Bool {
         guard !opStack.isEmpty else { return false }
         do {
@@ -83,7 +79,7 @@ class CalculatorBrain: CustomStringConvertible {
     typealias PropertyList = AnyObject
     var program: PropertyList {
         get {
-            return history
+            return opStack.map { String($0) }
         }
         set {
             if let opSymbols = newValue as? [String] {
@@ -93,6 +89,8 @@ class CalculatorBrain: CustomStringConvertible {
                         newOpStack.append(op)
                     } else if let operand = Double(opSymbol) {
                         newOpStack.append(.Operand(operand))
+                    } else {
+                        newOpStack.append(.Variable(opSymbol))
                     }
                 }
                 opStack = newOpStack
