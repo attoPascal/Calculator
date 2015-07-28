@@ -30,6 +30,14 @@ class CalculatorViewController: UIViewController {
         }
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        guard let navController = segue.destinationViewController as? UINavigationController else { fatalError() }
+        guard let gvc = navController.visibleViewController as? GraphViewController else { fatalError() }
+        
+        gvc.title = String(brain)
+        gvc.program = brain.program
+    }
+    
     @IBAction func appendDigit(sender: UIButton) {
         let digit = sender.currentTitle!
         
@@ -135,7 +143,7 @@ class CalculatorViewController: UIViewController {
             case .MissingArgument:
                 display.text = "missing argument"
             case .UnknownVariable:
-                display.text = "unknown variable"
+                display.text = "📉"
             case .NegativeRoot:
                 display.text = "root of negative number"
             case .DivisionByZero:
