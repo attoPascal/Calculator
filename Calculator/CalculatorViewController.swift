@@ -15,6 +15,7 @@ class CalculatorViewController: UIViewController {
     
     private var brain = CalculatorBrain()
     private var userIsInTheMiddleOfTypingANumber = false
+    private let memoryVar = "x"
     
     var displayValue: Double? {
         get {
@@ -105,7 +106,7 @@ class CalculatorViewController: UIViewController {
     
     @IBAction func setMemory() {
         if let value = displayValue {
-            brain.variableValues["M"] = value
+            brain.variableValues[memoryVar] = value
             userIsInTheMiddleOfTypingANumber = false
             updateUI()
         }
@@ -113,7 +114,7 @@ class CalculatorViewController: UIViewController {
     
     @IBAction func pushMemory() {
         if userIsInTheMiddleOfTypingANumber { enter() }
-        brain.pushOperand("M")
+        brain.pushOperand(memoryVar)
         updateUI()
     }
     
