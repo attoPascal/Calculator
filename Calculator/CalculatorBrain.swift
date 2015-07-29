@@ -134,11 +134,12 @@ class CalculatorBrain: CustomStringConvertible {
     }
     
     func evaluate() throws -> Double {
+        guard !opStack.isEmpty else { return 0 }
         return try evaluate(opStack).result
     }
     
     private func evaluate(ops: [Op]) throws -> (result: Double, remainingOps: [Op]) {
-        guard !ops.isEmpty else { return (0, []) }
+        guard !ops.isEmpty else { throw CalculatorError.MissingArgument }
         
         var remainingOps = ops
         let op = remainingOps.removeLast()
