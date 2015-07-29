@@ -17,49 +17,75 @@ class GraphView: UIView {
 
     weak var dataSource: GraphViewDataSource?
     
-    var axesOrigin: CGPoint {
-        return convertPoint(self.center, fromView: superview)
+    private var _origin: CGPoint?
+    var origin: CGPoint {
+        get {
+            if let point = _origin {
+                return point
+            } else {
+                return defaultOrigin
+            }
+        }
+        set {
+            _origin = newValue
+            setNeedsDisplay()
+        }
     }
     
     @IBInspectable
-    var scale: CGFloat = 25
+    var scale: CGFloat = 35 {
+        didSet {
+            setNeedsDisplay()
+        }
+    }
+    
+    private let defaultScale: CGFloat = 35
+    private var defaultOrigin: CGPoint {
+        return convertPoint(center, fromView: superview)
+    }
+    
+    func setDefaults() {
+        scale = defaultScale
+        origin = defaultOrigin
+    }
     
     override func drawRect(rect: CGRect) {
-        let axesDrawer = AxesDrawer(color: UIColor.blackColor())
-        axesDrawer.drawAxesInRect(rect, origin: axesOrigin, pointsPerUnit: scale)
+        let axesDrawer = AxesDrawer(color: UIColor.blackColor(), contentScaleFactor: contentScaleFactor)
+        axesDrawer.drawAxesInRect(rect, origin: origin, pointsPerUnit: scale)
         
         var path = newPath()
         UIColor.blueColor().setStroke()
         
-        for i in -140...140 {
-            let xValue = CGFloat(i) / 10
-            let yValue = dataSource?.valueFor(x: xValue)
+        for x in 0...Int(bounds.width) {
+            let xValue = round(convertToCartesianCoordinates(CGFloat(x)), accuracy: scale / 2)
             
             // to handle undefined values
-            if path.empty {
-                if yValue != nil {
+            if let yValue = dataSource?.valueFor(x: xValue) {
+                if path.empty {
                     // start path
-                    path.moveToPoint(pointInCoordinateSystem(x: xValue, y: yValue!))
+                    path.moveToPoint(convertToPointInViewCoordinates(x: xValue, y: yValue))
+                } else {
+                    // continue path
+                    path.addLineToPoint(convertToPointInViewCoordinates(x: xValue, y: yValue))
                 }
             } else {
-                if yValue != nil {
-                    // continue path
-                    path.addLineToPoint(pointInCoordinateSystem(x: xValue, y: yValue!))
-                } else {
-                    // end path
-                    path.stroke()
-                    path = newPath()
-                }
+                // end path
+                path.stroke()
+                path = newPath()
             }
         }
         
         path.stroke()
     }
     
-    private func pointInCoordinateSystem(x xValue: CGFloat, y yValue: CGFloat) -> CGPoint {
-        let x = axesOrigin.x + xValue * scale
-        let y = axesOrigin.y - yValue * scale
+    private func convertToPointInViewCoordinates(x xValue: CGFloat, y yValue: CGFloat) -> CGPoint {
+        let x = origin.x + xValue * scale
+        let y = origin.y - yValue * scale
         return CGPoint(x: x, y: y)
+    }
+    
+    private func convertToCartesianCoordinates(x: CGFloat) -> CGFloat {
+        return (x - origin.x) / scale
     }
     
     private func newPath() -> UIBezierPath {
@@ -67,4 +93,8 @@ class GraphView: UIView {
         path.lineWidth = 2
         return path
     }
+}
+
+func round(x: CGFloat, accuracy: CGFloat) -> CGFloat {
+    return CGFloat(round(x * accuracy) / accuracy)
 }

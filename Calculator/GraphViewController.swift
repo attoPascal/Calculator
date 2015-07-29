@@ -27,6 +27,25 @@ class GraphViewController: UIViewController, GraphViewDataSource {
         }
     }
     
+    @IBAction func pan(gesture: UIPanGestureRecognizer) {
+        let translation = gesture.translationInView(graphView)
+        graphView.origin = CGPoint(x: graphView.origin.x + translation.x,y: graphView.origin.y + translation.y)
+        gesture.setTranslation(CGPointZero, inView: graphView)
+    }
+
+    @IBAction func doubleTap(gesture: UITapGestureRecognizer) {
+        graphView.origin = gesture.locationInView(graphView)
+    }
+    
+    @IBAction func pinch(gesture: UIPinchGestureRecognizer) {
+        graphView.scale *= gesture.scale
+        gesture.scale = 1
+    }
+    
+    @IBAction func twoFingerDoubleTap(gesture: UITapGestureRecognizer) {
+        graphView.setDefaults()
+    }
+    
     func valueFor(x x: CGFloat) -> CGFloat? {
         do {
             calculator.variableValues[variable] = Double(x)

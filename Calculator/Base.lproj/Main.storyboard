@@ -431,11 +431,13 @@
                             <view contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="V5h-xF-sRn" customClass="GraphView" customModule="Calculator" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="scale">
-                                        <real key="value" value="30"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="LYG-Ok-wSS" appends="YES" id="GSC-Od-l91"/>
+                                    <outletCollection property="gestureRecognizers" destination="OKJ-Hp-Ran" appends="YES" id="os6-cX-1M1"/>
+                                    <outletCollection property="gestureRecognizers" destination="WkX-M1-vcy" appends="YES" id="h49-uU-qBG"/>
+                                    <outletCollection property="gestureRecognizers" destination="bLr-4C-9zy" appends="YES" id="usp-zu-vid"/>
+                                </connections>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -452,6 +454,26 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4In-jU-XVh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer numberOfTapsRequired="2" id="LYG-Ok-wSS">
+                    <connections>
+                        <action selector="doubleTap:" destination="cYg-3K-3Cs" id="t5a-k9-eJt"/>
+                    </connections>
+                </tapGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="OKJ-Hp-Ran">
+                    <connections>
+                        <action selector="pan:" destination="cYg-3K-3Cs" id="m4S-xE-ODy"/>
+                    </connections>
+                </panGestureRecognizer>
+                <pinchGestureRecognizer id="WkX-M1-vcy">
+                    <connections>
+                        <action selector="pinch:" destination="cYg-3K-3Cs" id="31X-k1-eK4"/>
+                    </connections>
+                </pinchGestureRecognizer>
+                <tapGestureRecognizer numberOfTapsRequired="2" numberOfTouchesRequired="2" id="bLr-4C-9zy">
+                    <connections>
+                        <action selector="twoFingerDoubleTap:" destination="cYg-3K-3Cs" id="za2-lo-fEO"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1272" y="1060"/>
         </scene>
