@@ -30,6 +30,10 @@ class CalculatorViewController: UIViewController {
         }
     }
     
+    override func viewDidLoad() {
+        setFontFeatureMonospacedNumbers(display)
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         guard let navController = segue.destinationViewController as? UINavigationController else { fatalError() }
         guard let gvc = navController.visibleViewController as? GraphViewController else { fatalError() }
@@ -154,6 +158,17 @@ class CalculatorViewController: UIViewController {
         } else {
             display.text = "unknown error"
         }
+    }
+    
+    private func setFontFeatureMonospacedNumbers(label: UILabel) {
+        let monospacedFeatureSettings = [[
+            UIFontFeatureTypeIdentifierKey: kNumberSpacingType,
+            UIFontFeatureSelectorIdentifierKey: kMonospacedNumbersSelector
+        ]]
+        let monospacedAttributes = [UIFontDescriptorFeatureSettingsAttribute: monospacedFeatureSettings]
+        
+        let fontDescriptor = label.font.fontDescriptor().fontDescriptorByAddingAttributes(monospacedAttributes)
+        label.font = UIFont(descriptor: fontDescriptor, size: 0)
     }
 }
 
