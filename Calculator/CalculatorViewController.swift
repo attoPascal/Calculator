@@ -38,7 +38,7 @@ class CalculatorViewController: UIViewController {
         guard let navController = segue.destinationViewController as? UINavigationController else { fatalError() }
         guard let gvc = navController.visibleViewController as? GraphViewController else { fatalError() }
         
-        gvc.title = String(brain)
+        gvc.title = brain.lastExpression
         gvc.program = brain.program
     }
     
@@ -172,3 +172,8 @@ class CalculatorViewController: UIViewController {
     }
 }
 
+extension CalculatorBrain {
+    var lastExpression: String? {
+        return description.componentsSeparatedByString(",").last
+    }
+}
