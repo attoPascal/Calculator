@@ -47,7 +47,7 @@ class GraphViewController: UIViewController, GraphViewDataSource, UIGestureRecog
     }
     
     @IBAction func twoFingerDoubleTap(gesture: UITapGestureRecognizer) {
-        graphView.setDefaults()
+        graphView.resetLayout()
     }
     
     func valueFor(x x: CGFloat) -> CGFloat? {

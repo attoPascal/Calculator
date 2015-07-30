@@ -51,9 +51,9 @@ class CalculatorBrain: CustomStringConvertible {
     }
     
     private var opStack = [Op]()
-    private var knownOps = [String: Op]()
+    private var knownOps = [String : Op]()
     
-    var variableValues = [String: Double]()
+    var variableValues = [String : Double]()
     
     var description: String {
         var parsing = parseDescription(opStack)
@@ -71,7 +71,7 @@ class CalculatorBrain: CustomStringConvertible {
         guard !opStack.isEmpty else { return false }
         do {
             let (_, remainingOps) = try evaluate(opStack)
-            return remainingOps.count == 0
+            return remainingOps.isEmpty
         }
         catch { return false }
     }
@@ -118,16 +118,16 @@ class CalculatorBrain: CustomStringConvertible {
         opStack.append(Op.Operand(value))
     }
     
-    func pushOperand(symbol: String) {
+    func pushVariable(symbol: String) {
         opStack.append(Op.Variable(symbol))
     }
     
-    func performOperation(symbol: String) throws {
+    func pushOperator(symbol: String) throws {
         guard let operation = knownOps[symbol] else { throw CalculatorError.UnknownOperation }
         opStack.append(operation)
     }
     
-    func undoLastOp() {
+    func pop() {
         if !opStack.isEmpty {
             opStack.removeLast()
         }

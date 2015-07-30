@@ -48,7 +48,7 @@ class GraphView: UIView {
         return innerCenter
     }
     
-    func setDefaults() {
+    func resetLayout() {
         scale = defaultScale
         origin = defaultOrigin
     }

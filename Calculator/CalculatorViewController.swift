@@ -87,7 +87,7 @@ class CalculatorViewController: UIViewController {
             }
         } else {
             // undo last action
-            brain.undoLastOp()
+            brain.pop()
             updateUI()
         }
     }
@@ -96,7 +96,7 @@ class CalculatorViewController: UIViewController {
         guard let operation = sender.currentTitle else { return }
         
         if userIsInTheMiddleOfTypingANumber { enter() }
-        try! brain.performOperation(operation)
+        try! brain.pushOperator(operation)
         
         updateUI()
     }
@@ -126,7 +126,7 @@ class CalculatorViewController: UIViewController {
     
     @IBAction func pushMemory() {
         if userIsInTheMiddleOfTypingANumber { enter() }
-        brain.pushOperand(memoryVar)
+        brain.pushVariable(memoryVar)
         updateUI()
     }
     
