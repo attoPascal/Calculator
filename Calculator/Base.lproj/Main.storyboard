@@ -462,11 +462,13 @@
                 <panGestureRecognizer minimumNumberOfTouches="1" id="OKJ-Hp-Ran">
                     <connections>
                         <action selector="pan:" destination="cYg-3K-3Cs" id="m4S-xE-ODy"/>
+                        <outlet property="delegate" destination="cYg-3K-3Cs" id="Bvc-Z4-az4"/>
                     </connections>
                 </panGestureRecognizer>
                 <pinchGestureRecognizer id="WkX-M1-vcy">
                     <connections>
                         <action selector="pinch:" destination="cYg-3K-3Cs" id="31X-k1-eK4"/>
+                        <outlet property="delegate" destination="cYg-3K-3Cs" id="PPD-y4-4Fu"/>
                     </connections>
                 </pinchGestureRecognizer>
                 <tapGestureRecognizer numberOfTapsRequired="2" numberOfTouchesRequired="2" id="bLr-4C-9zy">

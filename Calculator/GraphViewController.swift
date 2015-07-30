@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GraphViewController: UIViewController, GraphViewDataSource {
+class GraphViewController: UIViewController, GraphViewDataSource, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var graphView: GraphView! {
         didSet {
@@ -25,6 +25,10 @@ class GraphViewController: UIViewController, GraphViewDataSource {
         if let graphProgram = program {
             calculator.program = graphProgram
         }
+    }
+    
+    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
     }
     
     @IBAction func pan(gesture: UIPanGestureRecognizer) {
