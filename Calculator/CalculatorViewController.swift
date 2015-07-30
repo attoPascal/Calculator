@@ -8,13 +8,14 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class CalculatorViewController: UIViewController {
 
     @IBOutlet weak var display: UILabel!
     @IBOutlet weak var history: UILabel!
     
     private var brain = CalculatorBrain()
     private var userIsInTheMiddleOfTypingANumber = false
+    private let memoryVar = "x"
     
     var displayValue: Double? {
         get {
@@ -27,6 +28,18 @@ class ViewController: UIViewController {
                 display.text = "0"
             }
         }
+    }
+    
+    override func viewDidLoad() {
+        setFontFeatureMonospacedNumbers(display)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        guard let navController = segue.destinationViewController as? UINavigationController else { fatalError() }
+        guard let gvc = navController.visibleViewController as? GraphViewController else { fatalError() }
+        
+        gvc.title = brain.lastExpression
+        gvc.program = brain.program
     }
     
     @IBAction func appendDigit(sender: UIButton) {
@@ -74,7 +87,7 @@ class ViewController: UIViewController {
             }
         } else {
             // undo last action
-            brain.undoLastOp()
+            brain.pop()
             updateUI()
         }
     }
@@ -83,7 +96,7 @@ class ViewController: UIViewController {
         guard let operation = sender.currentTitle else { return }
         
         if userIsInTheMiddleOfTypingANumber { enter() }
-        try! brain.performOperation(operation)
+        try! brain.pushOperator(operation)
         
         updateUI()
     }
@@ -105,7 +118,7 @@ class ViewController: UIViewController {
     
     @IBAction func setMemory() {
         if let value = displayValue {
-            brain.variableValues["M"] = value
+            brain.variableValues[memoryVar] = value
             userIsInTheMiddleOfTypingANumber = false
             updateUI()
         }
@@ -113,7 +126,7 @@ class ViewController: UIViewController {
     
     @IBAction func pushMemory() {
         if userIsInTheMiddleOfTypingANumber { enter() }
-        brain.pushOperand("M")
+        brain.pushVariable(memoryVar)
         updateUI()
     }
     
@@ -134,7 +147,7 @@ class ViewController: UIViewController {
             case .MissingArgument:
                 display.text = "missing argument"
             case .UnknownVariable:
-                display.text = "unknown variable"
+                display.text = "📉"
             case .NegativeRoot:
                 display.text = "root of negative number"
             case .DivisionByZero:
@@ -146,5 +159,21 @@ class ViewController: UIViewController {
             display.text = "unknown error"
         }
     }
+    
+    private func setFontFeatureMonospacedNumbers(label: UILabel) {
+        let monospacedFeatureSettings = [[
+            UIFontFeatureTypeIdentifierKey: kNumberSpacingType,
+            UIFontFeatureSelectorIdentifierKey: kMonospacedNumbersSelector
+        ]]
+        let monospacedAttributes = [UIFontDescriptorFeatureSettingsAttribute: monospacedFeatureSettings]
+        
+        let fontDescriptor = label.font.fontDescriptor().fontDescriptorByAddingAttributes(monospacedAttributes)
+        label.font = UIFont(descriptor: fontDescriptor, size: 0)
+    }
 }
 
+extension CalculatorBrain {
+    var lastExpression: String? {
+        return description.componentsSeparatedByString(",").last
+    }
+}

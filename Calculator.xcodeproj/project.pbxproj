@@ -7,10 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		500A15B81B6536A900D8F6EA /* AxesDrawer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500A15B71B6536A900D8F6EA /* AxesDrawer.swift */; };
+		501E7FCF1B6646AD0019B77C /* GraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 501E7FCE1B6646AD0019B77C /* GraphViewController.swift */; };
+		5081452B1B66714D00CA3219 /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5081452A1B66714D00CA3219 /* SplitViewController.swift */; };
+		5081452D1B66857000CA3219 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5081452C1B66857000CA3219 /* GraphView.swift */; };
 		50C34DA21A7977AE007F550F /* CalculatorBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C34DA11A7977AE007F550F /* CalculatorBrain.swift */; };
 		50C9D40E1A8D083500CF5456 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50C9D40D1A8D083500CF5456 /* Helpers.swift */; };
 		50CF2BA21A7846BB00FB32CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CF2BA11A7846BB00FB32CF /* AppDelegate.swift */; };
-		50CF2BA41A7846BB00FB32CF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CF2BA31A7846BB00FB32CF /* ViewController.swift */; };
+		50CF2BA41A7846BB00FB32CF /* CalculatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CF2BA31A7846BB00FB32CF /* CalculatorViewController.swift */; };
 		50CF2BA71A7846BB00FB32CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 50CF2BA51A7846BB00FB32CF /* Main.storyboard */; };
 		50CF2BA91A7846BB00FB32CF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50CF2BA81A7846BB00FB32CF /* Images.xcassets */; };
 		50CF2BAC1A7846BB00FB32CF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50CF2BAA1A7846BB00FB32CF /* LaunchScreen.xib */; };
@@ -28,12 +32,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		500A15B71B6536A900D8F6EA /* AxesDrawer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AxesDrawer.swift; sourceTree = "<group>"; };
+		501E7FCE1B6646AD0019B77C /* GraphViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphViewController.swift; sourceTree = "<group>"; };
+		5081452A1B66714D00CA3219 /* SplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitViewController.swift; sourceTree = "<group>"; };
+		5081452C1B66857000CA3219 /* GraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		50C34DA11A7977AE007F550F /* CalculatorBrain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatorBrain.swift; sourceTree = "<group>"; };
 		50C9D40D1A8D083500CF5456 /* Helpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		50CF2B9C1A7846BA00FB32CF /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		50CF2BA01A7846BA00FB32CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		50CF2BA11A7846BB00FB32CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		50CF2BA31A7846BB00FB32CF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		50CF2BA31A7846BB00FB32CF /* CalculatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorViewController.swift; sourceTree = "<group>"; };
 		50CF2BA61A7846BB00FB32CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		50CF2BA81A7846BB00FB32CF /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		50CF2BAB1A7846BB00FB32CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -82,10 +90,14 @@
 			isa = PBXGroup;
 			children = (
 				50C34DA11A7977AE007F550F /* CalculatorBrain.swift */,
-				50CF2BA31A7846BB00FB32CF /* ViewController.swift */,
+				50CF2BA31A7846BB00FB32CF /* CalculatorViewController.swift */,
+				5081452C1B66857000CA3219 /* GraphView.swift */,
+				501E7FCE1B6646AD0019B77C /* GraphViewController.swift */,
 				50CF2BA51A7846BB00FB32CF /* Main.storyboard */,
-				50CF2B9F1A7846BA00FB32CF /* Supporting Files */,
+				5081452A1B66714D00CA3219 /* SplitViewController.swift */,
+				500A15B71B6536A900D8F6EA /* AxesDrawer.swift */,
 				50C9D40D1A8D083500CF5456 /* Helpers.swift */,
+				50CF2B9F1A7846BA00FB32CF /* Supporting Files */,
 			);
 			path = Calculator;
 			sourceTree = "<group>";
@@ -221,9 +233,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				50C34DA21A7977AE007F550F /* CalculatorBrain.swift in Sources */,
-				50CF2BA41A7846BB00FB32CF /* ViewController.swift in Sources */,
+				5081452B1B66714D00CA3219 /* SplitViewController.swift in Sources */,
+				50CF2BA41A7846BB00FB32CF /* CalculatorViewController.swift in Sources */,
+				500A15B81B6536A900D8F6EA /* AxesDrawer.swift in Sources */,
+				501E7FCF1B6646AD0019B77C /* GraphViewController.swift in Sources */,
 				50CF2BA21A7846BB00FB32CF /* AppDelegate.swift in Sources */,
 				50C9D40E1A8D083500CF5456 /* Helpers.swift in Sources */,
+				5081452D1B66857000CA3219 /* GraphView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,7 +316,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -337,7 +353,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";

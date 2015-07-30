@@ -51,9 +51,9 @@ class CalculatorBrain: CustomStringConvertible {
     }
     
     private var opStack = [Op]()
-    private var knownOps = [String: Op]()
+    private var knownOps = [String : Op]()
     
-    var variableValues = [String: Double]()
+    var variableValues = [String : Double]()
     
     var description: String {
         var parsing = parseDescription(opStack)
@@ -67,15 +67,11 @@ class CalculatorBrain: CustomStringConvertible {
         return result
     }
     
-    var history: [String] {
-        return opStack.map { String($0) }
-    }
-    
     var calculationComplete: Bool {
         guard !opStack.isEmpty else { return false }
         do {
             let (_, remainingOps) = try evaluate(opStack)
-            return remainingOps.count == 0
+            return remainingOps.isEmpty
         }
         catch { return false }
     }
@@ -83,7 +79,7 @@ class CalculatorBrain: CustomStringConvertible {
     typealias PropertyList = AnyObject
     var program: PropertyList {
         get {
-            return history
+            return opStack.map { String($0) }
         }
         set {
             if let opSymbols = newValue as? [String] {
@@ -93,6 +89,8 @@ class CalculatorBrain: CustomStringConvertible {
                         newOpStack.append(op)
                     } else if let operand = Double(opSymbol) {
                         newOpStack.append(.Operand(operand))
+                    } else {
+                        newOpStack.append(.Variable(opSymbol))
                     }
                 }
                 opStack = newOpStack
@@ -120,27 +118,28 @@ class CalculatorBrain: CustomStringConvertible {
         opStack.append(Op.Operand(value))
     }
     
-    func pushOperand(symbol: String) {
+    func pushVariable(symbol: String) {
         opStack.append(Op.Variable(symbol))
     }
     
-    func performOperation(symbol: String) throws {
+    func pushOperator(symbol: String) throws {
         guard let operation = knownOps[symbol] else { throw CalculatorError.UnknownOperation }
         opStack.append(operation)
     }
     
-    func undoLastOp() {
+    func pop() {
         if !opStack.isEmpty {
             opStack.removeLast()
         }
     }
     
     func evaluate() throws -> Double {
+        guard !opStack.isEmpty else { return 0 }
         return try evaluate(opStack).result
     }
     
     private func evaluate(ops: [Op]) throws -> (result: Double, remainingOps: [Op]) {
-        guard !ops.isEmpty else { return (0, []) }
+        guard !ops.isEmpty else { throw CalculatorError.MissingArgument }
         
         var remainingOps = ops
         let op = remainingOps.removeLast()
