@@ -91,8 +91,11 @@ class GraphView: UIView {
         origin = point
     }
     
-    func zoom(scale: CGFloat) {
-        self.scale *= scale
+    func zoom(factor: CGFloat, onPoint zoomPoint: CGPoint? = nil) {
+        scale *= factor
+        
+        let offset = origin - (zoomPoint ?? innerCenter)
+        origin = origin - offset + (offset * factor)
     }
     
     private func convertToPointInViewCoordinates(point: CGPoint) -> CGPoint {

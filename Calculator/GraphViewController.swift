@@ -38,7 +38,7 @@ class GraphViewController: UIViewController, GraphViewDataSource {
     }
     
     @IBAction func pinch(gesture: UIPinchGestureRecognizer) {
-        graphView.zoom(gesture.scale)
+        graphView.zoom(gesture.scale, onPoint: gesture.locationInView(graphView))
         gesture.scale = 1
     }
     
