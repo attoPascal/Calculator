@@ -29,16 +29,16 @@ class GraphViewController: UIViewController, GraphViewDataSource {
     
     @IBAction func pan(gesture: UIPanGestureRecognizer) {
         let translation = gesture.translationInView(graphView)
-        graphView.origin = CGPoint(x: graphView.origin.x + translation.x,y: graphView.origin.y + translation.y)
         gesture.setTranslation(CGPointZero, inView: graphView)
+        graphView.moveBy(translation)
     }
 
     @IBAction func doubleTap(gesture: UITapGestureRecognizer) {
-        graphView.origin = gesture.locationInView(graphView)
+        graphView.centerAt(gesture.locationInView(graphView))
     }
     
     @IBAction func pinch(gesture: UIPinchGestureRecognizer) {
-        graphView.scale *= gesture.scale
+        graphView.zoom(gesture.scale)
         gesture.scale = 1
     }
     

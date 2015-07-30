@@ -39,9 +39,13 @@ class GraphView: UIView {
         }
     }
     
+    private var innerCenter: CGPoint {
+        return convertPoint(center, fromView: superview)
+    }
+    
     private let defaultScale: CGFloat = 35
     private var defaultOrigin: CGPoint {
-        return convertPoint(center, fromView: superview)
+        return innerCenter
     }
     
     func setDefaults() {
@@ -77,6 +81,18 @@ class GraphView: UIView {
         }
         
         path.stroke()
+    }
+    
+    func moveBy(translation: CGPoint) {
+        origin = origin + translation
+    }
+    
+    func centerAt(point: CGPoint) {
+        origin = point
+    }
+    
+    func zoom(scale: CGFloat) {
+        self.scale *= scale
     }
     
     private func convertToPointInViewCoordinates(point: CGPoint) -> CGPoint {
