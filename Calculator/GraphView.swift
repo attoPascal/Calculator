@@ -65,7 +65,7 @@ class GraphView: UIView {
             
             // to handle undefined values
             if let yValue = dataSource?.valueFor(x: xValue) {
-                let point = convertToPointInViewCoordinates(CGPoint(x: xValue, y: yValue))
+                let point = convertToViewCoordinates(CGPoint(x: xValue, y: yValue))
                 if path.empty {
                     // start path
                     path.moveToPoint(point)
@@ -98,8 +98,10 @@ class GraphView: UIView {
         origin = origin - offset + (offset * factor)
     }
     
-    private func convertToPointInViewCoordinates(point: CGPoint) -> CGPoint {
-        return origin + point * scale
+    private func convertToViewCoordinates(point: CGPoint) -> CGPoint {
+        let x = origin.x + point.x * scale
+        let y = origin.y - point.y * scale
+        return CGPoint(x: x, y: y)
     }
     
     private func convertToCartesianCoordinates(x: CGFloat) -> CGFloat {
