@@ -19,6 +19,7 @@
 		50CF2BA91A7846BB00FB32CF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 50CF2BA81A7846BB00FB32CF /* Images.xcassets */; };
 		50CF2BAC1A7846BB00FB32CF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 50CF2BAA1A7846BB00FB32CF /* LaunchScreen.xib */; };
 		50CF2BB81A7846BB00FB32CF /* CalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CF2BB71A7846BB00FB32CF /* CalculatorTests.swift */; };
+		50D1C3D51B6BE1FC000F3801 /* StatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D1C3D41B6BE1FC000F3801 /* StatsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		50CF2BB11A7846BB00FB32CF /* CalculatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalculatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		50CF2BB61A7846BB00FB32CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		50CF2BB71A7846BB00FB32CF /* CalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorTests.swift; sourceTree = "<group>"; };
+		50D1C3D41B6BE1FC000F3801 /* StatsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +96,7 @@
 				5081452C1B66857000CA3219 /* GraphView.swift */,
 				501E7FCE1B6646AD0019B77C /* GraphViewController.swift */,
 				50CF2BA51A7846BB00FB32CF /* Main.storyboard */,
+				50D1C3D41B6BE1FC000F3801 /* StatsViewController.swift */,
 				5081452A1B66714D00CA3219 /* SplitViewController.swift */,
 				500A15B71B6536A900D8F6EA /* AxesDrawer.swift */,
 				50C9D40D1A8D083500CF5456 /* Helpers.swift */,
@@ -239,6 +242,7 @@
 				501E7FCF1B6646AD0019B77C /* GraphViewController.swift in Sources */,
 				50CF2BA21A7846BB00FB32CF /* AppDelegate.swift in Sources */,
 				50C9D40E1A8D083500CF5456 /* Helpers.swift in Sources */,
+				50D1C3D51B6BE1FC000F3801 /* StatsViewController.swift in Sources */,
 				5081452D1B66857000CA3219 /* GraphView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

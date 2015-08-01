@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GraphViewController: UIViewController, GraphViewDataSource, UIGestureRecognizerDelegate {
+class GraphViewController: UIViewController, GraphViewDataSource, UIGestureRecognizerDelegate, UIPopoverPresentationControllerDelegate {
     
     @IBOutlet weak var graphView: GraphView! {
         didSet {
@@ -57,6 +57,19 @@ class GraphViewController: UIViewController, GraphViewDataSource, UIGestureRecog
         } catch {
             return nil
         }
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        guard let svc = segue.destinationViewController as? StatsViewController else { fatalError() }
+        guard let ppc = svc.popoverPresentationController else { fatalError() }
+        
+        svc.minValue = graphView.minValue
+        svc.maxValue = graphView.maxValue
+        ppc.delegate = self
+    }
+    
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .None
     }
     
 }
