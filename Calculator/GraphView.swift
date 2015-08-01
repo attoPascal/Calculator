@@ -39,6 +39,12 @@ class GraphView: UIView {
         }
     }
     
+    private var _minValue: CGFloat?
+    var minValue: CGFloat? { return _minValue }
+    
+    private var _maxValue: CGFloat?
+    var maxValue: CGFloat? { return _maxValue }
+    
     private var innerCenter: CGPoint {
         return convertPoint(center, fromView: superview)
     }
@@ -60,6 +66,9 @@ class GraphView: UIView {
         var path = newPath()
         UIColor.blueColor().setStroke()
         
+        _minValue = nil
+        _maxValue = nil
+        
         for x in 0...Int(bounds.width) {
             let xValue = round(convertToCartesianCoordinates(CGFloat(x)), accuracy: scale / 2)
             
@@ -73,6 +82,8 @@ class GraphView: UIView {
                     // continue path
                     path.addLineToPoint(point)
                 }
+                updateMinAndMax(yValue)
+                
             } else {
                 // end path
                 path.stroke()
@@ -112,6 +123,15 @@ class GraphView: UIView {
         let path = UIBezierPath()
         path.lineWidth = 2
         return path
+    }
+    
+    private func updateMinAndMax(value: CGFloat) {
+        if minValue == nil || value < minValue {
+            _minValue = value
+        }
+        if maxValue == nil || value > maxValue {
+            _maxValue = value
+        }
     }
 }
 
