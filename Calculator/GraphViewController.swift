@@ -65,6 +65,11 @@ class GraphViewController: UIViewController, GraphViewDataSource, UIGestureRecog
         
         svc.minValue = graphView.minValue
         svc.maxValue = graphView.maxValue
+        
+        let width = svc.view.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize).width
+        let height = svc.view.systemLayoutSizeFittingSize(UILayoutFittingExpandedSize).height
+        svc.preferredContentSize = CGSize(width: width, height: height)
+        
         ppc.delegate = self
     }
     
