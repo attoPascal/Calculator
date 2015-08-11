@@ -80,7 +80,7 @@ class CalculatorViewController: UIViewController {
         if userIsInTheMiddleOfTypingANumber {
             // undo typing: backspace
             if display.text!.characters.count > 1 {
-                display.text = String(dropLast(display.text!.characters))
+                display.text = String(display.text!.characters.dropLast())
             } else {
                 displayValue = 0
                 userIsInTheMiddleOfTypingANumber = false
@@ -105,7 +105,7 @@ class CalculatorViewController: UIViewController {
         if userIsInTheMiddleOfTypingANumber {
             if display.text!.hasPrefix("-") {
                 // remove minus
-                display.text = String(dropFirst(display.text!.characters))
+                display.text = String(display.text!.characters.dropFirst())
             } else {
                 // add minus
                 display.text = "-" + display.text!
